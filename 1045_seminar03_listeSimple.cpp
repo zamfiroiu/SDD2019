@@ -35,7 +35,7 @@ nod* inserareSfarsit(nod* cap, Ferma f) {
 			temp = temp->next;
 		}
 		temp->next = nou;
-		
+
 	}
 	else {
 		cap = nou;
@@ -103,16 +103,19 @@ nod* inserareInainteDeUnNodCuValoareaData(nod* cap, const char* nume, Ferma f) {
 	nod* nou = createNod(f, NULL);
 	if (cap) {
 		nod* p = cap;
-		nod* adresaMax = cap;
+		nod* adresaMax = NULL;
 		while (p) {
 			if (p->next && strcmp(p->next->info.nume, nume) == 0) {
+				if (!adresaMax) { 
+					adresaMax = p;
+				}
 				if (p->next->info.nrAnimale > adresaMax->next->info.nrAnimale) {
 					adresaMax = p;
 				}
 			}
 			p = p->next;
 		}
-		if (adresaMax == cap) {
+		if (adresaMax==NULL) {
 			if (strcmp(cap->info.nume, nume) == 0) {
 				cap = inserareInceput(cap, f);
 			}
@@ -121,6 +124,12 @@ nod* inserareInainteDeUnNodCuValoareaData(nod* cap, const char* nume, Ferma f) {
 			}
 		}
 		else {
+			if (strcmp(cap->info.nume, nume) == 0) {
+				if (cap->info.nrAnimale > adresaMax->info.nrAnimale) {
+					cap = inserareInceput(cap, f);
+					return cap;
+				}
+			}
 			nou->next = adresaMax->next;
 			adresaMax->next = nou;
 		}
@@ -141,7 +150,7 @@ void main() {
 	cap = inserareSfarsit(cap, createFerma("Crevedia", 1200));
 
 	afisareListaFerme(cap);
-	
+
 	cap = inserareInceput(cap, createFerma("Avicola", 1200));
 
 	afisareListaFerme(cap);
@@ -149,7 +158,7 @@ void main() {
 
 	//stergereListaRecursiv(&cap);
 
-	cap = inserareInceput(cap, createFerma("Ferma", 400));
+	//cap = inserareInceput(cap, createFerma("Ferma", 400));
 
 	afisareListaFerme(cap);
 	printf("\n\n");
