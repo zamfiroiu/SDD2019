@@ -1,0 +1,17 @@
+4
+3
+Popescu
+4
+10 9 10 8
+5
+Ionescu
+3
+10 9 10
+2
+Georgescu
+4
+10 9 10 10
+4
+Vasilescu
+2
+10 8
